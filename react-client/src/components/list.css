@@ -1,0 +1,105 @@
+/* .container {
+    position: relative;
+    text-align: center;
+    color: white;
+} */
+
+/* Bottom left text */
+/* .bottom-left { */
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+/* } */
+
+/* Top left text */
+/* .top-left { */
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 3em;
+    color: black;
+    text-align: center;
+/* } */
+
+/* Top right text */
+/* .top-right { */
+    position: absolute;
+    top: 8px;
+    right: 16px;
+/* } */
+
+/* Bottom right text */
+/* .bottom-right { */
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+/* } */
+
+/* Centered text */
+/* .centered { */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+/* } */
+
+.test{
+    display: block;
+    position: relative
+}
+
+#appFunc{
+    background:#C2B9B0
+}
+#appDescription{
+    background:#eee;
+    height: 80 vh;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin: auto;
+    display: block;
+    position: relative
+}
+
+h1 {
+	color: orange;
+	font-family: 'Noto Serif';
+	font-size: 220px;
+	font-weight: 700;
+    line-height: 138px;
+    margin-top: 0px;
+	margin-bottom: -15px;
+	margin-left: 5%;
+}
+
+p {
+	color: #333;
+	font-family: 'Noto Serif';
+	font-size: 40px;
+	font-style: italic;
+	font-weight: 500;
+	line-height: 54px;
+	margin-bottom: 24px;
+	max-width: auto;
+	text-indent: -2px;
+}
+
+a {
+    color: #b11;	
+    display: block;
+	font-weight: 700;
+	font-size: 16px;
+	letter-spacing: 3px;
+	margin-left: -6px;
+	text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover {
+	color: #333;
+}
+#pros{
+    
+    display:flex;
+    background: #96858F;
+}
