@@ -24,7 +24,7 @@ class FoodSearch extends React.Component {
 
   changeHandler(e){
     this.setState({[e.target.name]: e.target.value}, ()=>{
-        if(this.state.food.length >= 2 && this.props.canSearch){
+        if(this.state.food.length >= 2 && this.props.canSearch.signedIn && this.props.canSearch.date){
             this.setState({fdEnabled: false})
         }else{
             this.setState({fdEnabled: true})

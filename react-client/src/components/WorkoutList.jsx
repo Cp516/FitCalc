@@ -1,6 +1,7 @@
 import React from 'react';
 import WorkoutItem from './WorkoutItem.jsx';
 
+
 const WorkoutList = (props) => (
   <div>
     {/* <h4> List Component </h4> */}
@@ -18,6 +19,7 @@ const WorkoutList = (props) => (
       </div>
     </div>
   </div>
-)
+  )
+
 
 export default WorkoutList;

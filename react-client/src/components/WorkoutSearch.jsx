@@ -24,7 +24,7 @@ class WorkoutSearch extends React.Component {
 
   changeHandler(e){
     this.setState({[e.target.name]: e.target.value}, ()=>{
-        if(this.state.workout.length >= 2 && this.state.weight_kg.length >= 2 && this.props.canSearch){
+        if(this.state.workout.length >= 2 && this.state.weight_kg.length >= 2 && this.props.canSearch.signedIn && this.props.canSearch.date){
             this.setState({wrkotenabled: false})
         }else{
             this.setState({wrkotenabled: true})            

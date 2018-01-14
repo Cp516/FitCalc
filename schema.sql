@@ -15,7 +15,7 @@ CREATE TABLE food (
   id int NOT NULL AUTO_INCREMENT,
   description varchar(255) NOT NULL,
   calories integer NOT NULL,
-  date integer NOT NULL,
+  date varchar(22) NOT NULL,
   user integer NOT NULL,
   FOREIGN KEY (user) REFERENCES user(id),
   PRIMARY KEY (ID)
@@ -26,7 +26,7 @@ CREATE TABLE exercise (
   description varchar(255) NOT NULL,
   calories integer NOT NULL,
   user integer NOT NULL, 
-  date integer NOT NULL,
+  date varchar(23) NOT NULL,
   FOREIGN KEY (user) REFERENCES user(id),  
   PRIMARY KEY (ID)
 );

@@ -20,18 +20,20 @@ app.post('/foodItem', function(req, res){
     if(err){
       console.log(err)
     }else{
-      items.addFoodItem(results, req.body.name, req.body.cals)
+      items.addFoodItem(results, req.body.name, req.body.cals, req.body.date)
     }
   })
   res.send();
 })
+
 app.post('/workoutItem', function(req, res){
-  console.log(req.body)
+  console.log("inside add workout route server",req.body)
   items.oneUser(req.body.userId, (err, results)=>{
     if(err){
       console.log(err)
     }else{
-      items.addWorkoutItem(results, req.body.name, req.body.cals)
+      console.log(req.body)
+      items.addWorkoutItem(results, req.body.name, req.body.cals, req.body.date)
     }
   })
   res.send();

@@ -28,14 +28,19 @@ class App extends React.Component {
       user: '',
       userId: '',
       email: '',
+      date: '',
       foods: [],
       workouts: [],
       snEnabled: true,
       signedIn: false,
+      dateInput: false,
       displayName: '',
       displayIt: 'none',
       workoutCals: [],
-      foodCals: []
+      wkDates: ["x2"],
+      foodCals: [],
+      fdDates:["x1"]
+    
     }
     this.foodSearchHandler = this.foodSearchHandler.bind(this);
     this.exerciseSearchHandler = this.exerciseSearchHandler.bind(this);
@@ -52,6 +57,7 @@ class App extends React.Component {
       this.setState({workoutCals: ["Calories Burned"]}, ()=>{
         for(var i = 0; i <res.data.length; i++){
           this.state.workoutCals.push(res.data[i].calories)
+          this.state.wkDates.push(res.data[i].date)          
         }
       })
       // console.log('workoutdata=>',res.data)
@@ -59,12 +65,14 @@ class App extends React.Component {
       .then(()=>{
         axios.get("/userfooddata", {params: {userId: this.state.userId}})
         .then((res)=>{
-          this.setState({foodCals: ["Intake Calories"]},()=>{
+          this.setState({foodCals: ["Calorie Intake"]},()=>{
+            console.log(res)
             for(var i = 0; i < res.data.length; i++){
               this.state.foodCals.push(res.data[i].calories)
+              this.state.fdDates.push(res.data[i].date)
             }
           })   
-          console.log('fooddata=>',res.data)
+          // console.log('fooddata=>',res.data)
         })
         .then(()=>{
           console.log(this.state.foodCals, this.state.workoutCals)
@@ -78,20 +86,36 @@ class App extends React.Component {
   
 
   chart(){
+    console.log('date data', this.state.fdDates)
     c3.generate({
       bindto: '#chart',
       data: {
+        xs: {'Calorie Intake': 'x1',
+             'Calories Burned': 'x2'
+
+        },
           columns: [
+            // this.state.foodCals,
+            this.state.fdDates,
+            this.state.wkDates,
             this.state.foodCals,
             this.state.workoutCals
           ],
+        
           type: 'spline'
-      }
+      },
+      axis : {
+        x : {
+            type : 'timeseries',
+            tick: {
+                format: "%Y-%-m-%d"
+            }
+        }
+    }
   });
   
   }
   newUser(user, email){
-    console.log(user)
     this.setState({signedIn: true, userId: this.state.email})
     axios.post('/user', {user, email})
     .then((res) =>{
@@ -103,8 +127,9 @@ class App extends React.Component {
   }
 
   addFoodItem(name, cals){
-    var userId = this.state.userId
-    axios.post('/foodItem', {userId, name, cals})
+    var userId = this.state.userId;
+    var date = this.state.date;
+    axios.post('/foodItem', {userId, name, cals, date})
     .then(function(res){
       console.log(res)
     })
@@ -114,8 +139,9 @@ class App extends React.Component {
   }
 
   addWorkoutItem(name, cals){
-    var userId = this.state.userId
-    axios.post('/workoutItem', {userId, name, cals})
+    var userId = this.state.userId;
+    var date = this.state.date;
+    axios.post('/workoutItem', {userId, name, cals, date})
     .then(function(res){
       console.log(res)
     })
@@ -158,7 +184,7 @@ class App extends React.Component {
       weight_kg: weight,
     }, {
       headers: {
-         
+          
           "Content-Type":"application/json"
          }
     })
@@ -235,17 +261,17 @@ class App extends React.Component {
         <br/>
       </form>
       <hr size="3" style={{background:"#96858F"}}/>
+      
+      <DatePicker style={{textAlign: 'center'}}name="calen" hintText="Date"  onChange={(x, event) => {this.setState({date: JSON.stringify(event).slice(1, 11), dateInput: true})}}/>
 
       <div style={{display: "flex", justifyContent: "space-between"}}>
 
         <div style={{width: "700px"}}>
-        {/* <DatePicker hintText="Date" /> */}
-
-          <FoodSearch displayIt={this.state.displayIt} canSearch={this.state.signedIn} displayName={this.state.displayName} foodClickHandler={this.foodSearchHandler} style={{display:'block'}}/>
+          <FoodSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} foodClickHandler={this.foodSearchHandler} style={{display:'block'}}/>
           <FoodList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
         </div>
         <div style={{width: "700px"}}>
-          <WorkoutSearch displayIt={this.state.displayIt} canSearch={this.state.signedIn} displayName={this.state.displayName} exerciseClickHandler={this.exerciseSearchHandler} style={{display:'block'}}/>
+          <WorkoutSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} exerciseClickHandler={this.exerciseSearchHandler} style={{display:'block'}}/>
           <WorkoutList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
         </div> 
       </div>

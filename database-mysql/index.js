@@ -18,9 +18,10 @@ var newUser = function(name, email){
   })
 }
 
-var addFoodItem = function(id, name, cals){
+var addFoodItem = function(id, name, cals, date){
   console.log(id[0].id)
-  connection.query("INSERT INTO food (description, calories, user) VALUES (?, ?, ?)", [name, cals, id[0].id], function(err, results, fields){
+  connection.query("INSERT INTO food (description, calories, user, date) VALUES (?, ?, ?, ?)", 
+    [name, cals, id[0].id, date], function(err, results, fields){
     if(err){
       console.log(err);
     } else{
@@ -28,8 +29,9 @@ var addFoodItem = function(id, name, cals){
     }
   })
 }
-var addWorkoutItem = function(id, name, cals){
-  connection.query("INSERT INTO exercise (description, calories, user) VALUES (?, ?, ?)", [name, cals, id[0].id], function(err, results, fields){
+var addWorkoutItem = function(id, name, cals, date){
+  connection.query("INSERT INTO exercise (description, calories, user, date) VALUES (?, ?, ?, ?)", 
+    [name, cals, id[0].id, date], function(err, results, fields){
     if(err){
       console.log(err);
     } else{
@@ -50,7 +52,8 @@ var oneUser = function(email, cb){
 }
 
 var selectAllFood = function(id, callback) {
-  connection.query('SELECT calories FROM food WHERE user = ?', [id[0].id], function(err, results, fields) {
+  connection.query('SELECT date, calories FROM food WHERE user = ?', 
+    [id[0].id], function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
@@ -60,7 +63,8 @@ var selectAllFood = function(id, callback) {
 };
 
 var selectAllExercises = function(id, callback) {
-  connection.query('SELECT calories FROM exercise WHERE user = ?', [id[0].id], function(err, results, fields) {
+  connection.query('SELECT date, calories FROM exercise WHERE user = ?', 
+    [id[0].id], function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
