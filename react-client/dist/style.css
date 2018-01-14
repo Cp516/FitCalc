@@ -37,7 +37,9 @@
   }
   
   .txn-row:hover {
-    color: #00a07b;
+    color: #f6fa08;
+    
+    /* background: rgb(221, 244, 248); */
   }
   
   .txn-data {

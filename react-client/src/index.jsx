@@ -9,6 +9,9 @@ import WorkoutList from './components/WorkoutList.jsx';
 import FoodSearch from './components/FoodSearch.jsx';
 import WorkoutSearch from './components/WorkoutSearch.jsx';
 import style from './components/list.css';
+import ActionDone from 'material-ui/svg-icons/action/done';
+import ActionContact from 'material-ui/svg-icons/communication/contacts';
+import ActionEqualizer from 'material-ui/svg-icons/av/Equalizer';
 import ActionTimeLine from 'material-ui/svg-icons/action/timeline';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import IconButton from 'material-ui/IconButton';
@@ -17,7 +20,7 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import actions from './components/actions';
 import DatePicker from 'material-ui/DatePicker';
-const config = require('./config.js');
+
 
 
 
@@ -221,30 +224,40 @@ class App extends React.Component {
           <div id="appDescription" >
             <h1>Fit Cal</h1>
             <p>
-            Lose Weight And Gain Muscle, </p>
-            <p style={{textAlign: "center"}}>Hustle For That Muscle,</p>
-            <p style={{textAlign: "right"}}>This Can Get Difficult So We're to Help</p>
-
-            <div>
-              With FitCal We Make It Simple To Keep Track Of Your Calorie Intake and Calorie Expenditure
-              You Look What Your going to Eat Or What You Ate and It Counts The Calories For You 
-              Simply Add When You Found The Right Food
-              You Look Up The Exercises you've Done and Show You how Many Calories You've Burned <br/>Just Add Accordinly 
+            Lose <span>Weight</span> And Gain <span>Muscle</span>, </p>
+            <p style={{textAlign: "center"}}><span>Hustle</span> For That <span>Muscle</span>,</p>
+            <p style={{textAlign: "right"}}>This Can Get <span>Difficult</span> So We're to <span>Help</span></p>
+              
+            <div style={{display:"flex", justifyContent: "space-around", fontSize:"25px"}} >
+              <div style={{width: "auto", height: "150px"}}>
+                <ActionDone style={{color:"orange", width: 36,
+        height: 36}}/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;Easy Food Calorie Lookup<br/><br/>
+                  <ActionContact style={{color: "orange", width: 36,
+        height: 36}}/>              
+                  &nbsp;&nbsp;&nbsp;&nbsp;Simple & Quick Add To Personal Account
+                
+              </div>
+              <div style={{width: "auto", height: "150px"}}>
+              <ActionDone style={{color:"orange", width: 36,
+        height: 36}}/>                
+                  &nbsp;&nbsp;&nbsp;&nbsp;Find Out How Many Calories You Burned<br/><br/>
+              <ActionTimeLine style={{color: "orange", width: 36,
+        height: 36}}/>
+                &nbsp;&nbsp;&nbsp;&nbsp;Lined Graphed Of Historical Data
+              </div>
             </div>
-            <IconButton
-              iconStyle={styles.smallIcon}
-              style={styles.small}
-            >
-              <ActionTimeLine/>
-            </IconButton> 
+              <ActionDone style={{color:"orange"}}/>
+            
             Once Your Done Added It We Keep Track Of Your How Many Calorie You've Burned And How many Calories You Taken In  
           </div>
  
     <div id="appFunc">
-      <form style={{textAlign: 'center'}}>
+      <form style={{textAlign: 'center', background:"gray", padding:"20px"}}>
       &nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
           floatingLabelText="Name"
+          floatingLabelStyle={{color:"black"}}          
           name="user"
           onChange={this.changeHandler}
           value={this.state.user}
@@ -252,34 +265,44 @@ class App extends React.Component {
         />&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
           floatingLabelText="Email"
+          underlineStyle={{color:"black"}}
+          floatingLabelStyle={{color:"black", fontSize:"25px"}}
+          inputStyle={{color:"black"}}
           name="email"
           onChange={this.changeHandler}
-          value={this.state.email}
-        />&nbsp;&nbsp;&nbsp;&nbsp;
-        <RaisedButton label="Sign In" primary={true}  disabled={this.state.snEnabled} 
+          value={this.state.email} 
+        />
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <RaisedButton disabledBackgroundColor={{color: "#00BCD4"}} label="Sign In" primary={true}  disabled={this.state.snEnabled} 
         onClick={()=>{this.newUser(this.state.user, this.state.email)}}/>
         <br/>
+
+        <DatePicker style={{textAlign: 'center'}} inputStyle={{color:"black", fontWeight: "bold"}} name="calen" hintText="Date" hintStyle={{color:"black"}} onChange={(x, event) => {this.setState({date: JSON.stringify(event).slice(1, 11), dateInput: true})}}/>
+
       </form>
       <hr size="3" style={{background:"#96858F"}}/>
       
-      <DatePicker style={{textAlign: 'center'}}name="calen" hintText="Date"  onChange={(x, event) => {this.setState({date: JSON.stringify(event).slice(1, 11), dateInput: true})}}/>
+      <div style={{height: "80vh"}}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
 
-      <div style={{display: "flex", justifyContent: "space-between"}}>
-
-        <div style={{width: "700px"}}>
-          <FoodSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} foodClickHandler={this.foodSearchHandler} style={{display:'block'}}/>
-          <FoodList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
+          <div style={{width: "700px"}}>
+            <FoodSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} foodClickHandler={this.foodSearchHandler} style={{display:'block'}}/>
+            <FoodList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
+          </div>
+          <div style={{width: "700px"}}>
+            <WorkoutSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} exerciseClickHandler={this.exerciseSearchHandler} style={{display:'block'}}/>
+            <WorkoutList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
+          </div> 
         </div>
-        <div style={{width: "700px"}}>
-          <WorkoutSearch displayIt={this.state.displayIt} canSearch={{signedIn: this.state.signedIn, date:this.state.dateInput}} displayName={this.state.displayName} exerciseClickHandler={this.exerciseSearchHandler} style={{display:'block'}}/>
-          <WorkoutList addFoodItem={this.addFoodItem} addWorkoutItem={this.addWorkoutItem} workouts={this.state.workouts} foods={this.state.foods}/>
-        </div> 
+        <div id="chart">
+        <button disabled={!this.state.signedIn} onClick={this.graph}>Graphical History</button>
+        </div>
       </div>
+
     </div>
 
-       <div id="chart">
-       <button disabled={!this.state.signedIn} onClick={this.graph}>Graphical History</button>
-      </div>
     </div>
     </MuiThemeProvider>
     )

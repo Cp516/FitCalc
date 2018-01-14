@@ -17,6 +17,12 @@ const FoodList = (props) => (
           {/* <div className="txn-data">Weight</div> */}
           {/* <div className="txn-data">Date</div> */}
         </div>
+        <div className="txn-row">
+
+        <div className="txn-data" >hell</div>
+        <div className="txn-data">hello</div>
+        <div className="txn-data">hello</div>
+        </div>
         { props.foods.map((food, idx) => <FoodItem addFoodItem={props.addFoodItem} food={food} key={idx}/>)}
       </div>
     </div>

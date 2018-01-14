@@ -57,6 +57,8 @@ class FoodSearch extends React.Component {
           &nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
             floatingLabelText="Food"
+            floatingLabelStyle={{color:"#00BCD4"}}
+            inputStyle={{color:"#00BCD4"}}
             name="food"
             onChange={this.changeHandler}
             value={this.state.food}

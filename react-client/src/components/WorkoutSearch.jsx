@@ -64,12 +64,16 @@ class WorkoutSearch extends React.Component {
         <TextField
           floatingLabelText="WorkOut"
           name="workout"
+          floatingLabelStyle={{color:"#00BCD4"}}
+          inputStyle={{color:"#00BCD4"}}
           onChange={this.changeHandler}
           value={this.state.workout}
         />&nbsp;&nbsp;&nbsp;&nbsp;
         <TextField
           floatingLabelText="Weight"
           name="weight_kg"
+          floatingLabelStyle={{color:"#00BCD4"}}
+          inputStyle={{color:"#00BCD4"}}
           onChange={this.changeHandler}
           value={this.state.weight_kg}
 

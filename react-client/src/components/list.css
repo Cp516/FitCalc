@@ -49,7 +49,12 @@
 }
 
 #appFunc{
-    background:#C2B9B0
+    /* background:#eee;
+     */
+     background: #eee
+}
+span{
+    color:orange
 }
 #appDescription{
     background:#eee;
